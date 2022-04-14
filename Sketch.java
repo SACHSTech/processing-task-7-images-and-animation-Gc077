@@ -9,8 +9,10 @@ public class Sketch extends PApplet {
 
   // Declare size variables 
   // Rocket
-  float fltRocketX = width / 2
+  float fltRocketX = 500;
   float fltRocketY = 600;
+  float fltRocketSpeedX = 1;
+  float fltRocketSpeedY = 2;
 
   // Shooting Star
   float fltStarX;
@@ -49,6 +51,18 @@ public class Sketch extends PApplet {
 
     // Draw rocket and animate 
     image(imgRocket, fltRocketX, fltRocketY);
+    fltRocketX += fltRocketSpeedX;
+    fltRocketY = (float) Math.pow(fltRocketX, 2) / 1000;
+    System.out.println(fltRocketX+ " " +fltRocketY);
+
+    // Rocket collision detection
+    if(fltRocketX < 0 || fltRocketX > width){
+      fltRocketSpeedX *= -1;
+    }
+
+    if(fltRocketY < 0 || fltRocketY > height - 80){
+      fltRocketSpeedY *= -1;
+    }
     
 
 
