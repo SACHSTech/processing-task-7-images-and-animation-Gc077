@@ -12,11 +12,11 @@ public class Sketch extends PApplet {
   float fltRocketX = 500;
   float fltRocketY = 600;
   float fltRocketSpeedX = 1;
-  float fltRocketSpeedY = 2;
 
-  // Shooting Star
-  float fltStarX;
-  float fltStarY;
+  // Comet 
+  float fltCometX = 20;
+  float fltCometY = 600;
+  float fltCometSpeedY = 1;
 	
   /**
    * Called once at the beginning of execution, put your size all in this method
@@ -52,21 +52,27 @@ public class Sketch extends PApplet {
     // Draw rocket and animate 
     image(imgRocket, fltRocketX, fltRocketY);
     fltRocketX += fltRocketSpeedX;
-    fltRocketY = (float) Math.pow(fltRocketX, 2) / 1000;
-    System.out.println(fltRocketX+ " " +fltRocketY);
+    fltRocketY = (float) Math.pow(fltRocketX,2) / 1000;
+    fltRocketY += fltRocketSpeedX;
 
     // Rocket collision detection
-    if(fltRocketX < 0 || fltRocketX > width){
+    if(fltRocketX < 0 - 54 || fltRocketX > 745){
       fltRocketSpeedX *= -1;
     }
 
-    if(fltRocketY < 0 || fltRocketY > height - 80){
-      fltRocketSpeedY *= -1;
+    // Draw circle to represent comet and animate
+    fill(200, 243, 233);
+    circle(fltCometX, fltCometY, 40);
+    fltCometY += fltCometSpeedY;
+    fltCometX = (float) Math.pow(fltCometY, 2) / 1000;
+
+    // Comet collision detection
+    if(fltCometY < 0 + 10 || fltCometY > 600){
+      fltCometSpeedY *= -1;
     }
-    
 
-
-	
- 
+    if(fltCometX < 0 + 19 || fltCometX > width){
+      fltCometSpeedY *= -1;
+    }
   }
 }
